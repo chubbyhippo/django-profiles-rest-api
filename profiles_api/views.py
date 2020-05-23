@@ -6,6 +6,7 @@ from rest_framework import viewsets
 from profiles_api import serializers
 from profiles_api import models
 
+
 class HelloApiView(APIView):
     """Test API View"""
     serializer_class = serializers.HelloSerializer
@@ -20,7 +21,7 @@ class HelloApiView(APIView):
         ]
 
         return Response({'message': 'Hello!', 'an_apiview': an_apiview})
-    
+
     def post(self, request):
         """Create a hello message with our name"""
 
@@ -31,7 +32,8 @@ class HelloApiView(APIView):
             message = f'Hello {name}'
             return Response({'message': message})
         else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk=None):
         """Handle updateing an object"""
@@ -79,7 +81,7 @@ class HelloViewSet(viewsets.ViewSet):
     def retrieve(self, reauest, pk=None):
         """Handle getting an object by its ID"""
         return Response({'http_method': 'GET'})
-    
+
     def update(self, request, pk=None):
         """Handle update an object"""
         return Response({'http_method': 'PUT'})
@@ -87,7 +89,7 @@ class HelloViewSet(viewsets.ViewSet):
     def partial_update(self, request, pk=None):
         """Handle updating part of an object"""
         return Response({'http_method': 'PATCH'})
-    
+
     def destroy(self, request, pk=None):
         """Handle removing an object"""
         return Response({'http_method': 'DELETE'})
